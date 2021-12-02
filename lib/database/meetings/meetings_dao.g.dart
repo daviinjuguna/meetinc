@@ -9,4 +9,5 @@ part of 'meetings_dao.dart';
 mixin _$MeetingsDaoMixin on DatabaseAccessor<AppDatabase> {
   $MeetingsTable get meetings => attachedDatabase.meetings;
   $MeetingsEntriesTable get meetingsEntries => attachedDatabase.meetingsEntries;
+  $ContactsTable get contacts => attachedDatabase.contacts;
 }
