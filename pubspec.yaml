@@ -43,9 +43,19 @@ dependencies:
 
   #state management
   flutter_bloc: ^8.0.0
+  hydrated_bloc: ^8.0.0
 
   #Stream management
   rxdart: ^0.27.3
+
+  #handling permissions
+  permission_handler: ^8.3.0
+
+  #contacts_flutter
+  contacts_service: ^0.6.3
+
+  #funcional programming
+  dartz: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -59,7 +69,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.4
+  # flutter_lints: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -337,12 +337,13 @@ class $ContactsTable extends Contacts with TableInfo<$ContactsTable, Contact> {
       requiredDuringInsert: false,
       defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 2, maxTextLength: 32),
-      typeName: 'TEXT',
-      requiredDuringInsert: true);
+  late final GeneratedColumn<String?> name =
+      GeneratedColumn<String?>('name', aliasedName, false,
+          additionalChecks: GeneratedColumn.checkTextLength(
+            minTextLength: 2,
+          ),
+          typeName: 'TEXT',
+          requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [id, name];
   @override

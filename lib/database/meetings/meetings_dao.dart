@@ -25,11 +25,12 @@ class MeetingsDao extends DatabaseAccessor<AppDatabase>
           .then((id) {
         final _meeting = Meeting(id: id, title: title, date: date);
         return MeetingWithContact(meeting: _meeting, contact: []);
-      }).onError((error, stackTrace) {
-        print("ERROR CREATE MEETING: $error,$stackTrace");
-        throw Exception();
+      }).catchError((error, stackTrace) {
+        print("ERROR CREATE MEETING\n$error\n$stackTrace");
+        // throw Exception();
       });
 
+//#Add contacts to meetings
   Future<void> writeMeeting(MeetingWithContact entry) => transaction(() async {
         final _meeting = entry.meeting;
 
