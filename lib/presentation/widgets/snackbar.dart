@@ -45,7 +45,7 @@ class SnackBarWidget {
         ?..hideCurrentSnackBar()
         ..showSnackBar(
           SnackBar(
-            duration: const Duration(seconds: 60),
+            // duration: const Duration(seconds: 60),
             backgroundColor: Theme.of(context).colorScheme.error,
             behavior: SnackBarBehavior.fixed,
             shape: const RoundedRectangleBorder(
@@ -82,7 +82,7 @@ class SnackBarWidget {
         ?..hideCurrentSnackBar()
         ..showSnackBar(
           SnackBar(
-            duration: const Duration(seconds: 60),
+            // duration: const Duration(seconds: 60),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.fixed,
             shape: const RoundedRectangleBorder(

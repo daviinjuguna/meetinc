@@ -15,8 +15,11 @@ class MeetingsDao extends DatabaseAccessor<AppDatabase>
     with _$MeetingsDaoMixin {
   MeetingsDao(AppDatabase attachedDatabase) : super(attachedDatabase);
 
-  Future<MeetingWithContact> createEmptyMeeting(
-          {required String title, required DateTime date}) =>
+  Future<MeetingWithContact> createEmptyMeeting({
+    required String title,
+    required DateTime date,
+    List<Contact> contacts = const [],
+  }) =>
       into(meetings)
           .insert(MeetingsCompanion.insert(
         title: title,
@@ -24,7 +27,10 @@ class MeetingsDao extends DatabaseAccessor<AppDatabase>
       ))
           .then((id) {
         final _meeting = Meeting(id: id, title: title, date: date);
-        return MeetingWithContact(meeting: _meeting, contact: []);
+        return MeetingWithContact(
+          meeting: _meeting,
+          contact: contacts,
+        );
       }).catchError((error, stackTrace) {
         print("ERROR CREATE MEETING\n$error\n$stackTrace");
         // throw Exception();
@@ -73,7 +79,9 @@ class MeetingsDao extends DatabaseAccessor<AppDatabase>
   }
 
   Stream<List<MeetingWithContact>> watchAllMeetings({DateTime? date}) {
-    Stream<List<Meeting>> _meetingStream = select(meetings).watch();
+    Stream<List<Meeting>> _meetingStream =
+        (select(meetings)..orderBy([(u) => OrderingTerm.desc(u.date)])).watch();
+
     if (date != null) {
       _meetingStream = (select(meetings)
             ..where((tbl) => tbl.date.day.equals(date.day)))
