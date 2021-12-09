@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
+import 'package:drift/drift.dart';
 import 'package:meetinc/database/app_database.dart';
 import 'package:meetinc/database/contacts/contacts.dart';
-import 'package:drift/drift.dart';
 
 part 'contacts_dao.g.dart';
 
@@ -23,5 +23,7 @@ class ContactsDao extends DatabaseAccessor<AppDatabase>
         print(s);
       });
 
-  Future<List<Contact>> getContact() => (select(contacts)).get();
+  Future<List<Contact>> getContact({String? query}) =>
+      (select(contacts)..where((tbl) => tbl.name.like("%${query ?? ""}%")))
+          .get();
 }

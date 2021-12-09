@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:meetinc/presentation/pages/add_contacts.dart';
+import 'package:meetinc/presentation/pages/add_meeting_page.dart';
 import 'package:meetinc/presentation/pages/contacts_page.dart';
 import 'package:meetinc/presentation/pages/dashboard_page.dart';
 import 'package:meetinc/presentation/pages/error_page.dart';
@@ -32,6 +34,12 @@ class Routes {
           return ResponsivePageRoute(
             builder: (builder) => SettingsPage(),
           );
+        case AddMeetingPage.route:
+          return ResponsivePageRoute(
+            builder: (builder) => AddMeetingPage(),
+          );
+        case AddContactsPage.route:
+          return ResponsivePageRoute(builder: (builder) => ContactsPage());
         default:
           return errorRoute(routeSettings);
       }

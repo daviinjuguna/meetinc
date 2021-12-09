@@ -30,49 +30,52 @@ class BigTip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (action != null) const Flexible(child: SizedBox.expand()),
-            IconTheme.merge(
-              data: Theme.of(context).iconTheme.copyWith(
-                    color: Theme.of(context).textTheme.caption!.color,
-                    size: 100,
-                  ),
-              child: icon,
-            ),
-            if (title != null || subtitle != null) const SizedBox(height: 22),
-            if (title != null)
-              DefaultTextStyle(
-                style: Theme.of(context).textTheme.headline6!,
-                textAlign: TextAlign.center,
-                child: title!,
+    return AspectRatio(
+      aspectRatio: 1.2,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (action != null) const Flexible(child: SizedBox.expand()),
+              IconTheme.merge(
+                data: Theme.of(context).iconTheme.copyWith(
+                      color: Theme.of(context).textTheme.caption!.color,
+                      size: 100,
+                    ),
+                child: icon,
               ),
-            if (subtitle != null) ...[
-              if (title != null) const SizedBox(height: 8),
-              DefaultTextStyle(
-                style: Theme.of(context).textTheme.subtitle1!,
-                textAlign: TextAlign.center,
-                child: subtitle!,
-              ),
+              if (title != null || subtitle != null) const SizedBox(height: 22),
+              if (title != null)
+                DefaultTextStyle(
+                  style: Theme.of(context).textTheme.headline6!,
+                  textAlign: TextAlign.center,
+                  child: title!,
+                ),
+              if (subtitle != null) ...[
+                if (title != null) const SizedBox(height: 8),
+                DefaultTextStyle(
+                  style: Theme.of(context).textTheme.subtitle1!,
+                  textAlign: TextAlign.center,
+                  child: subtitle!,
+                ),
+              ],
+              if (action != null) ...[
+                const Flexible(child: SizedBox.expand()),
+                TextButton(
+                  style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
+                    color: action is Text && (action as Text).style != null
+                        ? (action as Text).style!.color
+                        : Theme.of(context).colorScheme.secondary,
+                  ))),
+                  onPressed: actionCallback,
+                  child: action!,
+                ),
+              ],
             ],
-            if (action != null) ...[
-              const Flexible(child: SizedBox.expand()),
-              TextButton(
-                style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
-                  color: action is Text && (action as Text).style != null
-                      ? (action as Text).style!.color
-                      : Theme.of(context).colorScheme.secondary,
-                ))),
-                onPressed: actionCallback,
-                child: action!,
-              ),
-            ],
-          ],
+          ),
         ),
       ),
     );

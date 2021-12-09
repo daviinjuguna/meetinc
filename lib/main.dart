@@ -8,6 +8,8 @@ import 'package:meetinc/bloc/theme/theme_cubit.dart';
 import 'package:meetinc/utils/bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'bloc/add_meeting/add_meeting_bloc.dart';
+import 'bloc/meeting/meeting_bloc.dart';
 import 'routes/routes.dart';
 
 void main() async {
@@ -34,11 +36,14 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (create) => ThemeCubit()),
         BlocProvider(create: (create) => ContactBloc()),
+        BlocProvider(create: (create) => MeetingBloc()),
+        BlocProvider(create: (create) => AddMeetingBloc()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
             title: 'MeetInc',
+            debugShowCheckedModeBanner: false,
             theme: context.watch<ThemeCubit>().lightTheme?.copyWith(
                     appBarTheme: const AppBarTheme(
                   centerTitle: true,

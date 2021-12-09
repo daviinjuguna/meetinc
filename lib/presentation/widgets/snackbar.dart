@@ -58,7 +58,7 @@ class SnackBarWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "LOGIN ERROR",
+                  "Error",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

@@ -24,9 +24,9 @@ class Repository {
     }
   }
 
-  Future<Either<String, List<Contact>>> getContacts() async {
+  Future<Either<String, List<Contact>>> getContacts({String? query}) async {
     try {
-      return right(await _appDb.contactsDao.getContact());
+      return right(await _appDb.contactsDao.getContact(query: query));
     } catch (e, s) {
       print(s);
       return left(e.toString());
@@ -55,10 +55,11 @@ class Repository {
         );
   }
 
-  Future<Either<String, MeetingWithContact>> createMeeting(
-      {required String title,
-      required DateTime date,
-      List<Contact> contacts = const []}) async {
+  Future<Either<String, MeetingWithContact>> createMeeting({
+    required String title,
+    required DateTime date,
+    List<Contact> contacts = const [],
+  }) async {
     try {
       return right(await _appDb.meetingsDao
           .createEmptyMeeting(title: title, date: date, contacts: contacts));
@@ -69,7 +70,8 @@ class Repository {
   }
 
   Future<Either<String, String>> addContactsToMeeting(
-      MeetingWithContact meetingWithContact) async {
+    MeetingWithContact meetingWithContact,
+  ) async {
     try {
       await _appDb.meetingsDao.writeMeeting(meetingWithContact);
       return right("Success");

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:contacts_service/contacts_service.dart' as c;
 import 'package:flutter/foundation.dart';
 import 'package:meetinc/database/app_database.dart';
-import 'package:contacts_service/contacts_service.dart' as c;
 import 'package:meetinc/repo/repository.dart';
 import 'package:meta/meta.dart';
 
@@ -24,7 +24,7 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
     });
     on<GetContactEvent>((event, emit) async {
       emit(Contactloading());
-      final _res = await Repository().getContacts();
+      final _res = await Repository().getContacts(query: event.query);
       emit(_res.fold(
         (error) => ContactError(error),
         (contacts) => ContactSuccess(contacts),
